@@ -1,0 +1,46 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@charset "UTF-8";
+
+#main {
+	height: 1000px;
+}
+
+#map{
+	float: left;
+}
+
+#sidebar{
+	background-color: #333;
+	width: 200px;
+	float: right;
+}
+#content{
+	padding-top: 10px; 
+	padding-left: 10px; 
+	padding-right: 10px;
+	color: white; 
+}
+#infodiv{
+	width: 200px;
+	height: 250px;
+}
+#path{
+	z-index: 1;
+}
+#path.axis{
+	z-index: 0;
+}
+
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+
+
+#path{
+	z-index: 1;
+}
+#path.axis{
+	z-index: 0;
+}
