@@ -1,20 +1,29 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-
     <%= render "layouts/shim" %>
   </head>
   <body>
     <%= render "layouts/header"%>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
+
+    <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
       <%= yield %>
+      
+
+    <div class="container">
+      <div class="btn-group-lg" role="group">
+        <button type="button" class="btn btn-success">豊かな生き物</button>
+        <button type="button" class="btn btn-primary">地域とのつながり</button>
+        <button type="button" class="btn btn-info">快適な水辺</button>
+        <button type="button" class="btn btn-warning">水のきれいさ</button>
+        <button type="button" class="btn btn-danger">自然のすがた</button>
+      </div>
+
       
     </div>
   </body>
