@@ -1,0 +1,56 @@
+ja:
+  activerecord:
+    models:
+        user: ユーザー
+        survey: 調査
+        datum: 記録
+    attributes:
+        user:
+          name: 名前
+          email: メールアドレス
+          password: パスワード
+          password_digest: パスワードダイジェスト
+          password_confirmation: パスワード(確認)
+          remember_digest: 記憶ダイジェスト
+          admin: 管理者
+          activation_digest: 有効化ダイジェスト
+          activated: 有効性
+          reset_digest: パスワード再設定ダイジェスト
+        survey:
+          user_id: ユーザーID
+          name: 調査名
+          file: CSVファイル
+        datum:
+          survey_id: 調査ID
+          site_name: 調査地点名
+          researcher_name: 調査者
+          date: 調査日時
+          weather: 天気
+          temperature: 気温
+          latitude: 緯度
+          longitude: 経度
+          value1: 水の流れはゆたかですか？
+          value2: 岸のようすは自然らしいですか？
+          value#: 魚が川をさかのぼれるだろうか？
+          value4: 河原と水辺に植物がはえていますか？
+          value5: 鳥はいますか？
+          value6: 魚がいますか？
+          value7: 川底に生き物がいますか？
+          value8: 水は透明ですか？
+          value9: 水はくさくないですか？
+          value10: 水はきれいですか？
+          value11: 川やまわりのけしきは美しいですか？
+          value12: ごみが目につきますか？
+          value13: 水にふれてみたいですか？
+          value14: どんなにおいを感じますか？
+          value15: どんな音が聞こえますか？
+          value16: 川にまつわる話を聞いたことがありますか？
+          value17: 水辺に近づきやすいですか？
+          value18: 多くの人が利用していますか？
+          value19: 産業などの活用
+          value20: 環境の活動
+          value21: 自然のすがた
+          value22: ゆたかな生き物
+          value23: 水のきれいさ
+          value24: 快適な水辺
+          value25: 地域とのつながり

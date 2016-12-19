@@ -1,4 +1,8 @@
-<h1>New Survey</h1>
+<% provide(:title, "調査データの登録") %>
+<div>
+	<h1><%= yield(:title) %></h1>
+</div>
+
 
 <%= render 'form' %>
 

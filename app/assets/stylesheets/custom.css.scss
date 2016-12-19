@@ -2,10 +2,27 @@
 @import "bootstrap";
 
 @charset "UTF-8";
-
 header{
 	font-size: 30px;
 }
 .container{
+	min-width: 1200px;
 	font-size: 30px;
+}
+
+/* 共通スタイル */
+#map, #help{
+	margin-top: 30px;
+	text-align: center;
+}
+#login{
+	margin-top: 30px
+}
+#map{
+	height: 800px;
+	border: solid black 1px;
+}
+
+.btn-group-lg{
+	text-align: center;
 }

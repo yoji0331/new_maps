@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
@@ -9,22 +10,18 @@
   <body>
     <%= render "layouts/header"%>
 
-    <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-      <%= yield %>
-      
-
     <div class="container">
-      <div class="btn-group-lg" role="group">
-        <button type="button" class="btn btn-success">豊かな生き物</button>
-        <button type="button" class="btn btn-primary">地域とのつながり</button>
-        <button type="button" class="btn btn-info">快適な水辺</button>
-        <button type="button" class="btn btn-warning">水のきれいさ</button>
-        <button type="button" class="btn btn-danger">自然のすがた</button>
-      </div>
+
+      <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+        
 
       
+        <%= yield %>
     </div>
+      <script src="http://maps.googleapis.com/maps/api/js?sensor=true" type="text/javascript"></script>
+    <%= javascript_include_tag "google-maps.js"%>
+
   </body>
 </html>
