@@ -1,32 +1,37 @@
-/*global google*/
-/* グローバル関数の宣言 */
-'use strict';
+/*global google, markerclusterer*/
+var spots = [
+    {lat: 35.5614174, lng: 139.6928300},
+    {lat: 32.5614162, lng: 139.6928388},
+    {lat: 33.5614125, lng: 139.6928329},
+    {lat: 34.5614176, lng: 139.6928363},
+    {lat: 35.5614198, lng: 139.6928355}    
+]
 
-var blankScores = [],
-    center,
-    options,
-    map,
-    score,
-    markers = [];
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 3,
+        center: {lat: 35.5614174, lng: 139.6928300}
+    });
 
-var lat_array = [];
-var lng_array = [];
-var window_open_array = [];
-var obj = [];
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-var RADAR_CHART = {};
+    var markers = locations.map(function(location, i) {
+        return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+        });
+    });
 
-var formatData = [];
-for(var i=0;i<4;i++){
-    formatData[i] = new Array(6);
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
-center = new google.maps.LatLng(35.5614174, 139.6928321);
-options = {
-    zoom: 10,
-    center: center,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-map = new google.maps.Map($('#map').get(0), options);
+var locations = [
+    {lat: spots[0].lat, lng: spots[0].lng},
+    {lat: spots[1].lat, lng: spots[1].lng},
+    {lat: spots[2].lat, lng: spots[2].lng},
+    {lat: spots[3].lat, lng: spots[3].lng},
+    {lat: spots[4].lat, lng: spots[4].lng}
+];
 /*# UI
 - 情報ウィンドウ内の表示内容
     * 指標の主軸
