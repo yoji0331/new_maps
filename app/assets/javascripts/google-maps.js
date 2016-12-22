@@ -1,5 +1,4 @@
-/*global google, markerclusterer, $*/
-var area = [];
+/*global google, markerclusterer, $, d3*/
 var map = new google.maps.Map(
     document.getElementById('map'), {
         zoom: 3,
@@ -9,6 +8,14 @@ var map = new google.maps.Map(
         }
     });
 var markers = [];
+var formatData = [];
+var RADAR_CHART = {};
+var score = 5;
+var infowindows =[];
+var zindex=1;
+var markerclusterer;
+
+
 $(document).ready(function(){
     $.getJSON("data.json", function(spots){
         var i;
@@ -16,14 +23,204 @@ $(document).ready(function(){
             return (o instanceof Object && !(o instanceof Array)) ? true : false;
         };
         for(i=0;i<spots.length;i++){
-            area[i] = {lat: spots[i].latitude, lng: spots[i].longitude};
+            format(spots[i], i);
             var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
-            var marker = new google.maps.Marker({position: LatLng});
+            var marker = RADAR_CHART.createMarker(LatLng, i);
             markers.push(marker);
         }
-        var markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
     });
 });
+
+function format(spot, i){
+    formatData[i] = new Array(6);
+    formatData[i][0] = [spot.value1,spot.value2,spot.value3];
+    formatData[i][1] = [spot.value4,spot.value5,spot.value6, spot.value7];
+    formatData[i][2] = [spot.value8,spot.value9,spot.value10];
+    formatData[i][3] = [spot.value11,spot.value12,spot.value13, spot.value14, spot.value15];
+    formatData[i][4] = [spot.value16,spot.value17,spot.value18, spot.value19, spot.value20];
+    formatData[i][5] = [spot.value21,spot.value22,spot.value23, spot.value24, spot.value25];
+};
+
+function Mouseclick(ele){
+    console.log("click");
+    var id_value = ele.id;
+    console.log(id_value);
+    var id = id_value.substr(7);
+    console.log(id);
+    console.log(markerclusterer.clusters_[id]);
+
+}
+RADAR_CHART.removeRadarchart = function(index){
+    var svg = d3.select('#infodiv' + index).remove();
+}
+RADAR_CHART.createMarker = function(latlng, i){
+    var marker = new google.maps.Marker({
+        position: latlng
+    });
+    var infowindow  = null;
+    function attachInfowindow(){
+        if(infowindow === null){
+            infowindow = new google.maps.InfoWindow({
+                content: name + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
+                zIndex: 1
+            });
+            infowindows.push(infowindow);
+
+            infowindow.close();
+            infowindow.open(marker.getMap(),marker);
+            google.maps.event.addListener(infowindow,'closeclick',function(){
+                infowindow = null;
+            });
+        }
+        google.maps.event.addListener(infowindow, 'domready', function(){
+            RADAR_CHART.radarchart(i, formatData[i][score]);
+        });
+    };
+    attachInfowindow();
+    google.maps.event.addListener(marker,'click',function(){
+        attachInfowindow();
+    });
+    return marker;
+}
+RADAR_CHART.radarchart = function(index, scores){
+    'use strict';
+
+    var w,
+        h,
+        padding,
+        i,
+        j,
+        svg,
+        dataset,
+        paramCount,
+        max,
+        rScale,
+        grid,
+        label,
+        line;
+
+    w = 200;
+    h = 200;
+    padding = 30;
+
+
+    svg = d3.select('#infodiv' + index)
+        .append('svg')
+        .attr('width', w)
+        .attr('height', h);
+
+    dataset = [scores];
+
+    var k, axis =[], dataAxis;
+    if(scores.length % 2 == 0){
+        for (k=0;k < scores.length;k++){
+            axis.push(0);    
+            axis.push(3);    
+            axis.push(0); 
+        }   
+    } else {
+        for (k=0;k < scores.length;k++){
+            axis.push(0);    
+            axis.push(3);    
+        }
+    }
+    
+
+    dataAxis = [axis];
+    
+
+
+
+
+    paramCount = dataset[0].length;
+
+    max = 3;
+
+    rScale = d3.scale.linear()
+        .domain([0, max])
+        .range([0, w / 2 - padding]);
+
+    grid = function () {
+        var result = [],
+            arr;
+        for (i = 1; i <= max; i += 1) {
+            arr = [];
+            for (j = 0; j < paramCount; j += 1) {
+                arr.push(i);
+            }
+            result.push(arr);
+        }
+        return result;
+    };
+    grid();
+
+
+    label  = (function(){
+        var result = [];
+        for(var i=0; i<paramCount; i++){
+          result.push(max + 1);
+        }
+        return result;
+      })();
+
+    line = d3.svg.line()
+        .x(function (d, i) {
+            return rScale(d) * Math.cos(2 * Math.PI / paramCount * i - (Math.PI / 2)) + w / 2;
+        })
+        .y(function (d, i) {
+            return rScale(d) * Math.sin(2 * Math.PI / paramCount * i - (Math.PI / 2)) + w / 2;
+        })
+        .interpolate('linear');
+
+    svg.selectAll('path')
+        .data(dataset)
+        .enter()
+        .append('path')
+        .attr('d', function (d, i) {
+            return line(d) + "z";
+        })
+        .attr("stroke", function (d, i) {
+            return d3.scale.category10().range()[i];
+        })
+        .attr("stroke-width", 2)
+        .attr('fill', '#1f77b4');
+
+    svg.selectAll('path.axis')
+        .data(dataAxis)
+        .enter()
+        .append('path')
+        .attr('d', function (d,i) {
+            return line(d) + "z";
+        })
+        .attr("stroke", "black")
+        .attr("stroke-width", "2")
+        .attr('fill', 'none');
+
+
+    svg.selectAll("path.grid")
+        .data(grid)
+        .enter()
+        .append("path")
+        .attr("d", function (d, i) {
+            return line(d) + "z";
+        })
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "2")
+        .attr('fill', 'none');
+
+     svg.selectAll("text")
+     .data(label)
+     .enter()
+     .append('text')
+     .text(function(d, i){ return i+1; })
+     .attr("text-anchor", "middle")
+     .attr("dominant-baseline", "middle")
+     .attr('x', function(d, i){ return rScale(d) * Math.cos(2 * Math.PI / paramCount * i - (Math.PI / 2)) + w/2; })
+     .attr('y', function(d, i){ return rScale(d) * Math.sin(2 * Math.PI / paramCount * i - (Math.PI / 2)) + w/2; })
+     .attr("font-size", "15px");
+}
+
 /*# UI
 - 情報ウィンドウ内の表示内容
     * 指標の主軸
@@ -75,21 +272,4 @@ $(document).ready(function(){
       * マーカー
           * 情報ウィンドウ
       * データ
-
-# JSONフォーマットの例
-[
-    {
-        "user": "澤田洋二",
-        "survey": "尾駮小学校2016年秋",
-        "researcher":  "尾駮小学校3年生",
-        "site_name": "尾駮川上流",
-        "lat": 142.2,
-        "lng": 64.5.
-        "mi0": 2.5,
-        "mi1": 2.5,
-        "mi2": 2.5,
-        "mi3": 2.5,
-        ...
-    },
-    ...
-]*/
+*/
