@@ -20,13 +20,20 @@
       
         <%= yield %>
     </div>
+    <!--
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMsBxzOenULagu53wr6PfNp9lzD67OWSs&callback=initMap" >
+      </script>    
+    -->
+
+      <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMsBxzOenULagu53wr6PfNp9lzD67OWSs" >
+      </script>  
       <%= javascript_include_tag "markerclusterer.js" %>
       <%= javascript_include_tag "google-maps.js"%>
       
 
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMsBxzOenULagu53wr6PfNp9lzD67OWSs&callback=initMap">
-      </script>
+      
 
   </body>
 </html>

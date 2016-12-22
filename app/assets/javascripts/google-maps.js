@@ -1,37 +1,29 @@
-/*global google, markerclusterer*/
-var spots = [
-    {lat: 35.5614174, lng: 139.6928300},
-    {lat: 32.5614162, lng: 139.6928388},
-    {lat: 33.5614125, lng: 139.6928329},
-    {lat: 34.5614176, lng: 139.6928363},
-    {lat: 35.5614198, lng: 139.6928355}    
-]
-
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+/*global google, markerclusterer, $*/
+var area = [];
+var map = new google.maps.Map(
+    document.getElementById('map'), {
         zoom: 3,
-        center: {lat: 35.5614174, lng: 139.6928300}
+        center: {
+            lat: 35.5614174,
+            lng: 139.6928300
+        }
     });
-
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    var markers = locations.map(function(location, i) {
-        return new google.maps.Marker({
-            position: location,
-            label: labels[i % labels.length]
-        });
+var markers = [];
+$(document).ready(function(){
+    $.getJSON("data.json", function(spots){
+        var i;
+        var isObject = function(o) {
+            return (o instanceof Object && !(o instanceof Array)) ? true : false;
+        };
+        for(i=0;i<spots.length;i++){
+            area[i] = {lat: spots[i].latitude, lng: spots[i].longitude};
+            var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
+            var marker = new google.maps.Marker({position: LatLng});
+            markers.push(marker);
+        }
+        var markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
     });
-
-    var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-}
-var locations = [
-    {lat: spots[0].lat, lng: spots[0].lng},
-    {lat: spots[1].lat, lng: spots[1].lng},
-    {lat: spots[2].lat, lng: spots[2].lng},
-    {lat: spots[3].lat, lng: spots[3].lng},
-    {lat: spots[4].lat, lng: spots[4].lng}
-];
+});
 /*# UI
 - 情報ウィンドウ内の表示内容
     * 指標の主軸
