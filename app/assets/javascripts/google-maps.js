@@ -12,7 +12,7 @@ var formatData = [];
 var RADAR_CHART = {};
 var score = 5;
 var infowindows =[];
-var zindex=1;
+var maxZIndex = 2;
 var markerclusterer;
 
 
@@ -26,6 +26,7 @@ $(document).ready(function(){
             format(spots[i], i);
             var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
             var marker = RADAR_CHART.createMarker(LatLng, i);
+            console.log(marker);
             markers.push(marker);
         }
         markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
@@ -49,20 +50,22 @@ function Mouseclick(ele){
     var id = id_value.substr(7);
     console.log(id);
     console.log(markerclusterer.clusters_[id]);
-
+    
 }
 RADAR_CHART.removeRadarchart = function(index){
     var svg = d3.select('#infodiv' + index).remove();
 }
 RADAR_CHART.createMarker = function(latlng, i){
     var marker = new google.maps.Marker({
-        position: latlng
+        position: latlng,
+        map: map
     });
     var infowindow  = null;
     function attachInfowindow(){
         if(infowindow === null){
             infowindow = new google.maps.InfoWindow({
                 content: name + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
+                map: map,
                 zIndex: 1
             });
             infowindows.push(infowindow);
@@ -71,15 +74,21 @@ RADAR_CHART.createMarker = function(latlng, i){
             infowindow.open(marker.getMap(),marker);
             google.maps.event.addListener(infowindow,'closeclick',function(){
                 infowindow = null;
+            console.log("close");
+
             });
         }
+        var str = "#infodiv" + i;
         google.maps.event.addListener(infowindow, 'domready', function(){
+            d3.select(str).selectAll('svg').remove();
             RADAR_CHART.radarchart(i, formatData[i][score]);
+            console.log("domready");
         });
     };
     attachInfowindow();
     google.maps.event.addListener(marker,'click',function(){
         attachInfowindow();
+        console.log("marker click");
     });
     return marker;
 }
@@ -272,4 +281,10 @@ RADAR_CHART.radarchart = function(index, scores){
       * マーカー
           * 情報ウィンドウ
       * データ
+*/
+
+/*
+    開いている情報ウィンドウを配列に記憶しておく
+    閉じる/開くに対して配列を操作
+    配列を参照して情報ウィンドウを描画
 */

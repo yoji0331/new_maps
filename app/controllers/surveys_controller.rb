@@ -25,16 +25,18 @@ class SurveysController < ApplicationController
   # POST /surveys.json
   def create
     @survey = Survey.new(survey_params)
-
-    respond_to do |format|
       if @survey.save
-        format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
-        format.json { render :show, status: :created, location: @survey }
+        Datum.import(@survey)
+        flash[:success] = "データを登録しました。"
+        redirect_to @survey
       else
-        format.html { render :new }
-        format.json { render json: @survey.errors, status: :unprocessable_entity }
+        render 'new'
       end
-    end
+  end
+  def destroy
+    Survey.find(params[:id]).destroy
+    flash[:success] = "データを削除しました。"
+    redirect_to surveys_url
   end
 
   # PATCH/PUT /surveys/1
@@ -53,13 +55,6 @@ class SurveysController < ApplicationController
 
   # DELETE /surveys/1
   # DELETE /surveys/1.json
-  def destroy
-    @survey.destroy
-    respond_to do |format|
-      format.html { redirect_to surveys_url, notice: 'Survey was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +64,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:user_id, :name)
+      params.require(:survey).permit(:user_id, :name, :file)
     end
 end
