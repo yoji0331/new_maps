@@ -14,6 +14,8 @@ var score = 5;
 var infowindows =[];
 var maxZIndex = 2;
 var markerclusterer;
+var open = [];
+var latlngs = [];
 
 
 $(document).ready(function(){
@@ -25,8 +27,8 @@ $(document).ready(function(){
         for(i=0;i<spots.length;i++){
             format(spots[i], i);
             var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
+            latlngs[i] = LatLng; 
             var marker = RADAR_CHART.createMarker(LatLng, i);
-            console.log(marker);
             markers.push(marker);
         }
         markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
@@ -42,6 +44,33 @@ function format(spot, i){
     formatData[i][4] = [spot.value16,spot.value17,spot.value18, spot.value19, spot.value20];
     formatData[i][5] = [spot.value21,spot.value22,spot.value23, spot.value24, spot.value25];
 };
+
+function redraw(sc){
+    var center = map.getCenter();
+    var lat = center.lat();
+    var lng = center.lng();
+    var zoom = map.getZoom();
+    console.log(lat,lng,zoom);
+    score = sc;
+
+    map = null;
+    map = new google.maps.Map(
+    document.getElementById('map'), {
+        zoom: zoom,
+        center: {
+            lat: lat,
+            lng: lng
+        }
+    });
+
+    for(i=0;i<markers.length;i++){
+        var marker = RADAR_CHART.createMarker(latlngs[i], i);
+        markers[i] = marker;
+    }
+    markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+
+}
 
 function Mouseclick(ele){
     console.log("click");
@@ -69,26 +98,25 @@ RADAR_CHART.createMarker = function(latlng, i){
                 zIndex: 1
             });
             infowindows.push(infowindow);
-
             infowindow.close();
             infowindow.open(marker.getMap(),marker);
+            open[i] = 1;
+            console.log(open);
             google.maps.event.addListener(infowindow,'closeclick',function(){
                 infowindow = null;
-            console.log("close");
-
+                open[i] = 0;
+                console.log(open);
             });
         }
         var str = "#infodiv" + i;
         google.maps.event.addListener(infowindow, 'domready', function(){
             d3.select(str).selectAll('svg').remove();
             RADAR_CHART.radarchart(i, formatData[i][score]);
-            console.log("domready");
         });
     };
     attachInfowindow();
     google.maps.event.addListener(marker,'click',function(){
         attachInfowindow();
-        console.log("marker click");
     });
     return marker;
 }
@@ -230,6 +258,25 @@ RADAR_CHART.radarchart = function(index, scores){
      .attr("font-size", "15px");
 }
 
+
+$("#a0").click(function(){
+    redraw(0);
+});
+$("#a1").click(function(){
+    redraw(1);
+});
+$("#a2").click(function(){
+    redraw(2);
+});
+$("#a3").click(function(){
+    redraw(3);
+});
+$("#a4").click(function(){
+    redraw(4);
+});
+$("#a5").click(function(){
+    redraw(5);
+});
 /*# UI
 - 情報ウィンドウ内の表示内容
     * 指標の主軸
