@@ -28,7 +28,8 @@ $(document).ready(function(){
             format(spots[i], i);
             var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
             latlngs[i] = LatLng; 
-            var marker = RADAR_CHART.createMarker(LatLng, i);
+            open[i] = 0;
+            var marker = RADAR_CHART.createMarker(LatLng, i,false);
             markers.push(marker);
         }
         markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
@@ -50,7 +51,6 @@ function redraw(sc){
     var lat = center.lat();
     var lng = center.lng();
     var zoom = map.getZoom();
-    console.log(lat,lng,zoom);
     score = sc;
 
     map = null;
@@ -64,7 +64,7 @@ function redraw(sc){
     });
 
     for(i=0;i<markers.length;i++){
-        var marker = RADAR_CHART.createMarker(latlngs[i], i);
+        var marker = RADAR_CHART.createMarker(latlngs[i], i,true);
         markers[i] = marker;
     }
     markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
@@ -84,13 +84,13 @@ function Mouseclick(ele){
 RADAR_CHART.removeRadarchart = function(index){
     var svg = d3.select('#infodiv' + index).remove();
 }
-RADAR_CHART.createMarker = function(latlng, i){
+RADAR_CHART.createMarker = function(latlng, i,redraw){
     var marker = new google.maps.Marker({
         position: latlng,
         map: map
     });
     var infowindow  = null;
-    function attachInfowindow(){
+    function attachInfowindow(marker){
         if(infowindow === null){
             infowindow = new google.maps.InfoWindow({
                 content: name + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
@@ -99,13 +99,15 @@ RADAR_CHART.createMarker = function(latlng, i){
             });
             infowindows.push(infowindow);
             infowindow.close();
-            infowindow.open(marker.getMap(),marker);
-            open[i] = 1;
-            console.log(open);
+            infowindow.open(markers[i], marker);
+            if(open[i] == 0 && redraw == true){
+                infowindow.close();
+            } else {
+                open[i] = 1;            
+            }
             google.maps.event.addListener(infowindow,'closeclick',function(){
                 infowindow = null;
                 open[i] = 0;
-                console.log(open);
             });
         }
         var str = "#infodiv" + i;
@@ -114,9 +116,12 @@ RADAR_CHART.createMarker = function(latlng, i){
             RADAR_CHART.radarchart(i, formatData[i][score]);
         });
     };
-    attachInfowindow();
+    attachInfowindow(marker);
     google.maps.event.addListener(marker,'click',function(){
-        attachInfowindow();
+        if(open[i] == 0 && redraw == true){
+            open[i] = 1;
+        }
+        infowindows[i].open(markers[i], marker);
     });
     return marker;
 }
