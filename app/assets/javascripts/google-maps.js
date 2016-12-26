@@ -12,10 +12,11 @@ var formatData = [];
 var RADAR_CHART = {};
 var score = 5;
 var infowindows =[];
-var maxZIndex = 2;
+var maxZIndex = 1;
 var markerclusterer;
 var open = [];
 var latlngs = [];
+var current=[];
 
 
 $(document).ready(function(){
@@ -46,6 +47,7 @@ function format(spot, i){
     formatData[i][5] = [spot.value21,spot.value22,spot.value23, spot.value24, spot.value25];
 };
 
+
 function redraw(sc){
     var center = map.getCenter();
     var lat = center.lat();
@@ -69,17 +71,18 @@ function redraw(sc){
     }
     markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 
-
 }
-
+function removeMarker(i){
+    console.log(markers[i]);
+    current[i].close();
+    markers[i].setMap(null);
+}
 function Mouseclick(ele){
-    console.log("click");
-    var id_value = ele.id;
-    console.log(id_value);
-    var id = id_value.substr(7);
-    console.log(id);
-    console.log(markerclusterer.clusters_[id]);
-    
+    var i = ele.id.substr(7);
+    console.log(i);
+    removeMarker(i);
+    open[i] = 0;
+    RADAR_CHART.createMarker(latlngs[i], i, false);
 }
 RADAR_CHART.removeRadarchart = function(index){
     var svg = d3.select('#infodiv' + index).remove();
@@ -95,8 +98,11 @@ RADAR_CHART.createMarker = function(latlng, i,redraw){
             infowindow = new google.maps.InfoWindow({
                 content: name + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
                 map: map,
-                zIndex: 1
+                zIndex: maxZIndex
             });
+            current[i] = infowindow;
+            maxZIndex++;
+            console.log(maxZIndex);
             infowindows.push(infowindow);
             infowindow.close();
             infowindow.open(markers[i], marker);
