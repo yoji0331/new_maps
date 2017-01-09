@@ -64,7 +64,6 @@ function redraw(sc){
             lng: lng
         }
     });
-
     for(i=0;i<markers.length;i++){
         var marker = RADAR_CHART.createMarker(latlngs[i], i,true);
         markers[i] = marker;
@@ -73,13 +72,12 @@ function redraw(sc){
 
 }
 function removeMarker(i){
-    console.log(markers[i]);
+    infowindows.splice(i,1);
     current[i].close();
     markers[i].setMap(null);
 }
 function Mouseclick(ele){
     var i = ele.id.substr(7);
-    console.log(i);
     removeMarker(i);
     open[i] = 0;
     RADAR_CHART.createMarker(latlngs[i], i, false);
@@ -102,7 +100,6 @@ RADAR_CHART.createMarker = function(latlng, i,redraw){
             });
             current[i] = infowindow;
             maxZIndex++;
-            console.log(maxZIndex);
             infowindows.push(infowindow);
             infowindow.close();
             infowindow.open(markers[i], marker);

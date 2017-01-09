@@ -1,9 +1,9 @@
-<h1>Sample App</h1>
+<h1>水しるべ調査Webアプリ</h1>
 
-<p>Hi <%= @user.name %>,</p>
+<p>こんにちは,<%= @user.name %> さん</p>
 
 <p>
-Welcome to the Sample App!Click on the link below to activate your account:
+水しるべ調査アプリにご登録頂きありがとうございます。以下のリンクをクリックしてアカウントの有効化を行ってください。
 </p>
 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,
