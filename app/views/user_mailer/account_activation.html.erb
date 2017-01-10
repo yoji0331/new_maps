@@ -6,4 +6,4 @@
 水しるべ調査アプリにご登録頂きありがとうございます。以下のリンクをクリックしてアカウントの有効化を行ってください。
 </p>
 
-<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,email: @user.email) %>
