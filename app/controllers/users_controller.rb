@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:into] = "Please check your email to acttivate your account."
+      flash[:into] = "アカウントを有効化するためにメールを確認してください。"
       redirect_to root_url
     else
       render 'new'
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールを更新しました。"
       redirect_to @user
     else
       render 'edit'
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "アカウントを消去しました。"
     redirect_to users_url
   end
 
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 		def logged_in_user
       unless logged_in?
         store_location
-        flash[:danger] = "Please log in"
+        flash[:danger] = "ログインしてください。"
         redirect_to login_url
       end
     end
