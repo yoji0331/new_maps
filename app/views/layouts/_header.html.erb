@@ -15,6 +15,7 @@
         <li><%= link_to "ヘルプ", help_path %></li>
         <% if logged_in? %>
         <li><%= link_to "アカウント", user_path(current_user) %></li>
+        <li><%= link_to "データ登録", new_survey_path %></li>
         <li><%= link_to "ログアウト", logout_path, method: "delete" %></li>
       </ul>
       <% else %>
