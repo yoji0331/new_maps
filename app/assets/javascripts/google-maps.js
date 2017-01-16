@@ -145,6 +145,8 @@ RADAR_CHART.radarchart = function(index, scores){
         label,
         line;
 
+    var correct_dataset = [];
+
     w = 200;
     h = 200;
     padding = 30;
@@ -156,31 +158,33 @@ RADAR_CHART.radarchart = function(index, scores){
         .attr('height', h);
 
     dataset = [scores];
+    for(var i=0;i<dataset.length;i++){
+        correct_dataset[i] = [];
+        for(var j=0;j<dataset[i].length;j++){
+            var temp = dataset[i][j] * 10;   
+            correct_dataset[i][j] = (temp - 10) / 10;
+        }
+    }
 
     var k, axis =[], dataAxis;
     if(scores.length % 2 == 0){
         for (k=0;k < scores.length;k++){
             axis.push(0);    
-            axis.push(3);    
+            axis.push(2);    
             axis.push(0); 
         }   
     } else {
         for (k=0;k < scores.length;k++){
             axis.push(0);    
-            axis.push(3);    
+            axis.push(2);    
         }
     }
     
-
     dataAxis = [axis];
-    
-
-
-
 
     paramCount = dataset[0].length;
 
-    max = 3;
+    max = 2;
 
     rScale = d3.scale.linear()
         .domain([0, max])
@@ -204,7 +208,7 @@ RADAR_CHART.radarchart = function(index, scores){
     label  = (function(){
         var result = [];
         for(var i=0; i<paramCount; i++){
-          result.push(max + 1);
+          result.push(max + 0.5);
         }
         return result;
       })();
@@ -219,7 +223,7 @@ RADAR_CHART.radarchart = function(index, scores){
         .interpolate('linear');
 
     svg.selectAll('path')
-        .data(dataset)
+        .data(correct_dataset)
         .enter()
         .append('path')
         .attr('d', function (d, i) {
