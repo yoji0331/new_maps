@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :users
-  resources :surveys, except: [:update, :edit] do
+  resources :surveys do
     collection do
       get 'how_to_create'
     end
