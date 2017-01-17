@@ -24,7 +24,7 @@ class SurveysController < ApplicationController
   # POST /surveys
   # POST /surveys.json
   def create
-    @survey = Survey.new(survey_params)
+    @survey = current_user.surveys.build(survey_params)
       if @survey.save
         Datum.import(@survey)
         flash[:success] = "データを登録しました。"
@@ -64,6 +64,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:user_id, :name, :file)
+      params.require(:survey).permit(:name, :file)
     end
 end
