@@ -28,7 +28,7 @@ class SurveysController < ApplicationController
       if @survey.save
         Datum.import(@survey)
         flash[:success] = "データを登録しました。"
-        redirect_to @survey
+        redirect_to root
       else
         render 'new'
       end
