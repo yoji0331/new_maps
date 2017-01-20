@@ -7,7 +7,16 @@ header{
 }
 .container{
 	min-width: 600px;
+	font-size: 20px;
 }
+.navbar-header{
+	font-size: 28px;
+}
+
+#navbar{
+	font-size: 28px;
+}
+
 
 /* 共通スタイル */
 #map, #help{
@@ -28,9 +37,9 @@ header{
 
 #howtocreate{
 	.h3{
-		font-size: 18px;
+		font-size: 25px;
 	}
 	.p{
-		font-size: 14px;
+		font-size: 20px;
 	}
 }
