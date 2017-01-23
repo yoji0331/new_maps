@@ -2,7 +2,7 @@ json.array!(@data) do |datum|
   json.extract! datum, 
   	:survey_id, 
   	:site_name, 
-  	:reseacher_name, 
+  	:researcher_name, 
   	:date,
   	:weather,
   	:temperature,

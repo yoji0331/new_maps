@@ -1,2 +1,74 @@
-<h1>Data#show</h1>
-<p>Find me in app/views/data/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+<h4><%= @datum.site_name %></h4>
+<table>
+    <tr>
+        <th>調査者</th>
+        <th>調査日時</th>
+        <th>天気</th>
+        <th>気温</th>
+        <th>緯度</th>
+        <th>経度</th>
+        <th>水の流れはゆたかですか？</th>
+        <th>岸のようすは自然らしいですか？</th>
+        <th>魚が川をかさのぼれるだろうか？</th>
+        <th>河原と水辺に植物がはえていますか？</th>
+        <th>鳥はいますか？</th>
+        <th>魚がいますか？</th>
+        <th>川底に生き物がいますか？</th>
+        <th>水は透明ですか？</th>
+        <th>水はくさくないですか？</th>
+        <th>水はきれいですか？</th>
+        <th>川やまわりのけしきは美しいですか？</th>
+        <th>ごみが目につきますか？</th>
+        <th>水にふれてみたいですか？</th>
+        <th>どんなにおいを感じますか？</th>
+        <th>どんな音が聞こえますか？</th>
+        <th>川にまつわる話を聞いたことがありますか？</th>
+        <th>水辺に近づきやすいですか？</th>
+        <th>多くの人が利用していますか？</th>
+        <th>産業などの活用</th>
+        <th>環境の活動</th>
+        <th>自然のすがた</th>
+        <th>ゆたかな生き物</th>
+        <th>水のきれいさ</th>
+        <th>快適な水辺</th>
+        <th>地域とのつながり</th>
+    </tr>
+    <tr>
+        <td><%= @datum.researcher_name %></td>
+        <td><%= @datum.date %></td>
+        <td><%= @datum.weather %></td>
+        <td><%= @datum.temperature %></td>
+        <td><%= @datum.latitude %></td>
+        <td><%= @datum.longitude %></td>
+        <td><%= @datum.value1 %></td>
+        <td><%= @datum.value2 %></td>
+        <td><%= @datum.value3 %></td>
+        <td><%= @datum.value4 %></td>
+        <td><%= @datum.value5 %></td>
+        <td><%= @datum.value6 %></td>
+        <td><%= @datum.value7 %></td>
+        <td><%= @datum.value8 %></td>
+        <td><%= @datum.value9 %></td>
+        <td><%= @datum.value10 %></td>
+        <td><%= @datum.value11 %></td>
+        <td><%= @datum.value12 %></td>
+        <td><%= @datum.value13 %></td>
+        <td><%= @datum.value14 %></td>
+        <td><%= @datum.value15 %></td>
+        <td><%= @datum.value16 %></td>
+        <td><%= @datum.value17 %></td>
+        <td><%= @datum.value18 %></td>
+        <td><%= @datum.value19 %></td>
+        <td><%= @datum.value20 %></td>
+        <td><%= @datum.value21 %></td>
+        <td><%= @datum.value22 %></td>
+        <td><%= @datum.value23 %></td>
+        <td><%= @datum.value24 %></td>
+        <td><%= @datum.value25 %></td>
+    </tr>
+</table>
+
+
+<%= link_to 'Edit', edit_datum_path(@datum) %> |
+<%= link_to 'Back', datum_path %>

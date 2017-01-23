@@ -10,6 +10,7 @@ class SurveysController < ApplicationController
   # GET /surveys/1
   # GET /surveys/1.json
   def show
+    @data = @survey.data
   end
 
   # GET /surveys/new
@@ -28,7 +29,7 @@ class SurveysController < ApplicationController
       if @survey.save
         Datum.import(@survey)
         flash[:success] = "データを登録しました。"
-        redirect_to root
+        redirect_to root_path
       else
         render 'new'
       end
@@ -44,7 +45,7 @@ class SurveysController < ApplicationController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
-        format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
+        format.html { redirect_to @survey, notice: '調査データを更新しました。' }
         format.json { render :show, status: :ok, location: @survey }
       else
         format.html { render :edit }

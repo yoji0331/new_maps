@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161210222010) do
   create_table "data", force: :cascade do |t|
     t.integer  "survey_id"
     t.string   "site_name"
-    t.string   "reseacher_name"
+    t.string   "researcher_name"
     t.datetime "date"
     t.string   "weather"
     t.float    "temperature"

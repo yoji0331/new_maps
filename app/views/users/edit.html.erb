@@ -1,24 +1,22 @@
 <% provide(:title, "Edit user") %>
 <h1>アカウント情報の更新</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages' %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.submit "変更を保存する", class: "btn btn-primary" %>
-    <% end %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  </div>
+  <%= f.submit "変更を保存する", class: "btn btn-primary" %>
+<% end %>
+

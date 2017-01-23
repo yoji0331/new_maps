@@ -78,7 +78,7 @@ class Datum < ActiveRecord::Base
       encoding: "cp932:utf-8", headers: true, skip_blanks: true }) do |row|
       survey.data.create!(
         site_name: row["調査地点名"],
-        reseacher_name: row["調査代表者名"],
+        researcher_name: row["調査代表者名"],
         date: row["日付"],
         weather: row["天気"],
         temperature: row["気温"].to_f,

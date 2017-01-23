@@ -1,82 +1,12 @@
-<p id="notice"><%= notice %></p>
+<p><%= notice %></p>
+<h4><%= @survey.name %></h4>
 <table>
+	<tr>登録している地点名</tr>
 	<tr>
-		<th>name</th>
-		<th>site_name</th>
-		<th>reseacher_name</th>
-		<th>date</th>
-		<th>weather</th>
-		<th>temperature</th>
-		<th>latitude</th>
-		<th>longitude</th>
-		<th>value1</th>
-		<th>value2</th>
-		<th>value3</th>
-		<th>value4</th>
-		<th>value5</th>
-		<th>value6</th>
-		<th>value7</th>
-		<th>value8</th>
-		<th>value9</th>
-		<th>value10</th>
-		<th>value11</th>
-		<th>value12</th>
-		<th>value13</th>
-		<th>value14</th>
-		<th>value15</th>
-		<th>value16</th>
-		<th>value17</th>
-		<th>value18</th>
-		<th>value19</th>
-		<th>value20</th>
-		<th>value21</th>
-		<th>value22</th>
-		<th>value23</th>
-		<th>value24</th>
-		<th>value25</th>
-	</tr>
-		<td><%= @survey.name %></td>
-		<% @survey.data.each do |datum| %>
-		<tr>
-	
-		<td><%= datum.site_name %></td>
-		<td><%= datum.reseacher_name %></td>
-		<td><%= datum.date %></td>
-		<td><%= datum.weather %></td>
-		<td><%= datum.temperature %></td>
-		<td><%= datum.latitude %></td>
-		<td><%= datum.longitude %></td>
-		<td><%= datum.value1 %></td>
-		<td><%= datum.value2 %></td>
-		<td><%= datum.value3 %></td>
-		<td><%= datum.value4 %></td>
-		<td><%= datum.value5 %></td>
-		<td><%= datum.value6 %></td>
-		<td><%= datum.value7 %></td>
-		<td><%= datum.value8 %></td>
-		<td><%= datum.value9 %></td>
-		<td><%= datum.value10 %></td>
-		<td><%= datum.value11 %></td>
-		<td><%= datum.value12 %></td>
-		<td><%= datum.value13 %></td>
-		<td><%= datum.value14 %></td>
-		<td><%= datum.value15 %></td>
-		<td><%= datum.value16 %></td>
-		<td><%= datum.value17 %></td>
-		<td><%= datum.value18 %></td>
-		<td><%= datum.value19 %></td>
-		<td><%= datum.value20 %></td>
-		<td><%= datum.value21 %></td>
-		<td><%= datum.value22 %></td>
-		<td><%= datum.value23 %></td>
-		<td><%= datum.value24 %></td>
-		<td><%= datum.value25 %></td>
-	</tr>
-		
+		<% @data.each do |datum| %>
+			<td><%= link_to datum.site_name, controller: "data", action: "show", id: datum.id %></td>
 		<% end %>
-
+	</tr>
 </table>
-
-
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>
