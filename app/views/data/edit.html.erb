@@ -2,84 +2,108 @@
 <h1>登録データの編集</h1>
 
 <%= form_for(@datum) do |f| %>
+  <div id="data-edit-group">
+    <h2>基本情報</h2>
+    <%= f.label :site_name %>
+    <%= f.text_field :site_name, class: 'form-control' %>
 
-  <%= f.label :site_name %>
-  <%= f.text_field :site_name, class: 'form-control' %>
+    <%= f.label :researcher_name %>
+    <%= f.text_field :researcher_name , class: 'form-control' %>
 
-  <%= f.label :researcher_name %>
-  <%= f.text_field :researcher_name , class: 'form-control' %>
+    <%= f.label :date %>
+    <%= f.text_field :date , class: 'form-control' %>
 
-  <%= f.label :date %>
-  <%= f.text_field :date , class: 'form-control' %>
+    <%= f.label :weather %>
+    <%= f.text_field :weather , class: 'form-control' %>
 
-  <%= f.label :weather %>
-  <%= f.text_field :weather , class: 'form-control' %>
+    <%= f.label :temperature %>
+    <%= f.text_field :temperature , class: 'form-control' %>
 
-  <%= f.label :temperature %>
-  <%= f.text_field :temperature , class: 'form-control' %>
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude , class: 'form-control' %>
 
-  <%= f.label :latitude %>
-  <%= f.text_field :latitude , class: 'form-control' %>
-
-  <%= f.label :longitude %>
-  <%= f.text_field :longitude , class: 'form-control' %>
-
-  <%= f.label :value1 %>
-  <%= f.text_field :value1 , class: 'form-control' %>
-  <%= f.label :value2 %>
-  <%= f.text_field :value2 , class: 'form-control' %>
-  <%= f.label :value3 %>
-  <%= f.text_field :value3 , class: 'form-control' %>
-  <%= f.label :value4 %>
-  <%= f.text_field :value4 , class: 'form-control' %>
-  <%= f.label :value5 %>
-  <%= f.text_field :value5 , class: 'form-control' %>
-  <%= f.label :value6 %>
-  <%= f.text_field :value6 , class: 'form-control' %>
-  <%= f.label :value7 %>
-  <%= f.text_field :value7 , class: 'form-control' %>
-  <%= f.label :value8 %>
-  <%= f.text_field :value8 , class: 'form-control' %>
-  <%= f.label :value9 %>
-  <%= f.text_field :value9 , class: 'form-control' %>
-  <%= f.label :value10 %>
-  <%= f.text_field :value10 , class: 'form-control' %>
-  <%= f.label :value11 %>
-  <%= f.text_field :value11 , class: 'form-control' %>
-  <%= f.label :value12 %>
-  <%= f.text_field :value12 , class: 'form-control' %>
-  <%= f.label :value13 %>
-  <%= f.text_field :value13 , class: 'form-control' %>
-  <%= f.label :value14 %>
-  <%= f.text_field :value14 , class: 'form-control' %>
-  <%= f.label :value15 %>
-  <%= f.text_field :value15 , class: 'form-control' %>
-  <%= f.label :value16 %>
-  <%= f.text_field :value16 , class: 'form-control' %>
-  <%= f.label :value17 %>
-  <%= f.text_field :value17 , class: 'form-control' %>
-  <%= f.label :value18 %>
-  <%= f.text_field :value18 , class: 'form-control' %>
-  <%= f.label :value19 %>
-  <%= f.text_field :value19 , class: 'form-control' %>
-  <%= f.label :value20 %>
-  <%= f.text_field :value20 , class: 'form-control' %>
-  <%= f.label :value20 %>
-  <%= f.text_field :value20 , class: 'form-control' %>
-  <%= f.label :value21 %>
-  <%= f.text_field :value21 , class: 'form-control' %>
-  <%= f.label :value22 %>
-  <%= f.text_field :value22 , class: 'form-control' %>
-  <%= f.label :value23 %>
-  <%= f.text_field :value23 , class: 'form-control' %>
-  <%= f.label :value24 %>
-  <%= f.text_field :value24 , class: 'form-control' %>
-  <%= f.label :value25 %>
-  <%= f.text_field :value25 , class: 'form-control' %>
-
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude , class: 'form-control' %>
+  </div>
+  <hr>
+  <div id="data-edit-group">
+    <h2>自然なすがた</h2>
+    <%= f.label :value1 %>
+    <%= f.text_field :value1 , class: 'form-control' %>
+    <%= f.label :value2 %>
+    <%= f.text_field :value2 , class: 'form-control' %>
+    <%= f.label :value3 %>
+    <%= f.text_field :value3 , class: 'form-control' %>
+  </div>
+  <hr>
+  <div id="data-edit-group">
+    <h2>豊かな生き物</h2>  
+    <%= f.label :value4 %>
+    <%= f.text_field :value4 , class: 'form-control' %>
+    <%= f.label :value5 %>
+    <%= f.text_field :value5 , class: 'form-control' %>
+    <%= f.label :value6 %>
+    <%= f.text_field :value6 , class: 'form-control' %>
+    <%= f.label :value7 %>
+    <%= f.text_field :value7 , class: 'form-control' %>
+  </div>
+  <hr>
+  <div id="data-edit-group">
+    <h2>水のきれいさ</h2>
+    <%= f.label :value8 %>
+    <%= f.text_field :value8 , class: 'form-control' %>
+    <%= f.label :value9 %>
+    <%= f.text_field :value9 , class: 'form-control' %>
+    <%= f.label :value10 %>
+    <%= f.text_field :value10 , class: 'form-control' %>
+  </div>
+  <hr>
+  <div id="data-edit-group">
+    <h2>快適な水辺</h2>
+    <%= f.label :value11 %>
+    <%= f.text_field :value11 , class: 'form-control' %>
+    <%= f.label :value12 %>
+    <%= f.text_field :value12 , class: 'form-control' %>
+    <%= f.label :value13 %>
+    <%= f.text_field :value13 , class: 'form-control' %>
+    <%= f.label :value14 %>
+    <%= f.text_field :value14 , class: 'form-control' %>
+    <%= f.label :value15 %>
+    <%= f.text_field :value15 , class: 'form-control' %>
+  </div>
+  <hr>
+  <div id="data-edit-group">
+  <h2>地域とのつながり</h2>
+    <%= f.label :value16 %>
+    <%= f.text_field :value16 , class: 'form-control' %>
+    <%= f.label :value17 %>
+    <%= f.text_field :value17 , class: 'form-control' %>
+    <%= f.label :value18 %>
+    <%= f.text_field :value18 , class: 'form-control' %>
+    <%= f.label :value19 %>
+    <%= f.text_field :value19 , class: 'form-control' %>
+    <%= f.label :value20 %>
+    <%= f.text_field :value20 , class: 'form-control' %>
+    <%= f.label :value20 %>
+    <%= f.text_field :value20 , class: 'form-control' %>
+  </div>
+  <hr>
+  <div id="data-edit-group">
+    <h2>総合平均</h2>
+    <%= f.label :value21 %>
+    <%= f.text_field :value21 , class: 'form-control' %>
+    <%= f.label :value22 %>
+    <%= f.text_field :value22 , class: 'form-control' %>
+    <%= f.label :value23 %>
+    <%= f.text_field :value23 , class: 'form-control' %>
+    <%= f.label :value24 %>
+    <%= f.text_field :value24 , class: 'form-control' %>
+    <%= f.label :value25 %>
+    <%= f.text_field :value25 , class: 'form-control' %>
+  </div>
 
   <%= f.submit "変更を保存する", class: "btn btn-primary" %>
-
+  <hr>
 
 <%= link_to 'Show', @survey %> |
 <%= link_to 'Back', surveys_path %>

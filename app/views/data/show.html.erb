@@ -1,74 +1,176 @@
 <p id="notice"><%= notice %></p>
-<h4><%= @datum.site_name %></h4>
-<table>
-    <tr>
-        <th>調査者</th>
-        <th>調査日時</th>
-        <th>天気</th>
-        <th>気温</th>
-        <th>緯度</th>
-        <th>経度</th>
-        <th>水の流れはゆたかですか？</th>
-        <th>岸のようすは自然らしいですか？</th>
-        <th>魚が川をかさのぼれるだろうか？</th>
-        <th>河原と水辺に植物がはえていますか？</th>
-        <th>鳥はいますか？</th>
-        <th>魚がいますか？</th>
-        <th>川底に生き物がいますか？</th>
-        <th>水は透明ですか？</th>
-        <th>水はくさくないですか？</th>
-        <th>水はきれいですか？</th>
-        <th>川やまわりのけしきは美しいですか？</th>
-        <th>ごみが目につきますか？</th>
-        <th>水にふれてみたいですか？</th>
-        <th>どんなにおいを感じますか？</th>
-        <th>どんな音が聞こえますか？</th>
-        <th>川にまつわる話を聞いたことがありますか？</th>
-        <th>水辺に近づきやすいですか？</th>
-        <th>多くの人が利用していますか？</th>
-        <th>産業などの活用</th>
-        <th>環境の活動</th>
-        <th>自然のすがた</th>
-        <th>ゆたかな生き物</th>
-        <th>水のきれいさ</th>
-        <th>快適な水辺</th>
-        <th>地域とのつながり</th>
-    </tr>
-    <tr>
-        <td><%= @datum.researcher_name %></td>
-        <td><%= @datum.date %></td>
-        <td><%= @datum.weather %></td>
-        <td><%= @datum.temperature %></td>
-        <td><%= @datum.latitude %></td>
-        <td><%= @datum.longitude %></td>
-        <td><%= @datum.value1 %></td>
-        <td><%= @datum.value2 %></td>
-        <td><%= @datum.value3 %></td>
-        <td><%= @datum.value4 %></td>
-        <td><%= @datum.value5 %></td>
-        <td><%= @datum.value6 %></td>
-        <td><%= @datum.value7 %></td>
-        <td><%= @datum.value8 %></td>
-        <td><%= @datum.value9 %></td>
-        <td><%= @datum.value10 %></td>
-        <td><%= @datum.value11 %></td>
-        <td><%= @datum.value12 %></td>
-        <td><%= @datum.value13 %></td>
-        <td><%= @datum.value14 %></td>
-        <td><%= @datum.value15 %></td>
-        <td><%= @datum.value16 %></td>
-        <td><%= @datum.value17 %></td>
-        <td><%= @datum.value18 %></td>
-        <td><%= @datum.value19 %></td>
-        <td><%= @datum.value20 %></td>
-        <td><%= @datum.value21 %></td>
-        <td><%= @datum.value22 %></td>
-        <td><%= @datum.value23 %></td>
-        <td><%= @datum.value24 %></td>
-        <td><%= @datum.value25 %></td>
-    </tr>
-</table>
-
-
-<%= link_to 'Edit', edit_datum_path(@datum) %> |
-<%= link_to 'Back', datum_path %>
+<div id="data_show" width="100%">
+    <h1><%= @datum.site_name %></h1>
+    <div id="data-group">
+        <h2>基本情報</h2>
+        <table width="100%">
+        <tr>
+            <th class="key">調査項目</th>
+            <th class="value">値</th>
+        </tr>
+        <tr>
+            <td class="key">調査者</td>
+            <td class="value"><%= @datum.researcher_name %></td>
+        </tr>
+        <tr>
+            <td class="key">調査日時</td>
+            <td class="value"><%= @datum.date %></td>
+        </tr>
+        <tr>
+            <td class="key">天気</td>
+            <td class="value"><%= @datum.weather %></td>
+        </tr>
+        <tr>
+            <td class="key">気温</td>        
+            <td class="value"><%= @datum.temperature %></td>
+        </tr>
+        <tr>
+            <td class="key">緯度</td>
+            <td class="value"><%= @datum.latitude %></td>
+        </tr>
+        <tr>
+            <td class="key">経度</td>
+            <td class="value"><%= @datum.longitude %></td>
+        </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="data-group">
+        <h2>自然なすがた</h2>
+        <table width="100%">
+        <tr>
+            <td class="key">水の流れはゆたかですか？</td>
+            <td class="value"><%= @datum.value1 %></td>
+        </tr>
+        <tr>
+            <td class="key">岸のようすは自然らしいですか？</td>
+            <td class="value"><%= @datum.value2 %></td>
+        </tr>
+        <tr>
+            <td class="key">魚が川をかさのぼれるだろうか？</td>
+            <td class="value"><%= @datum.value3 %></td>        
+        </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="data-group">
+        <h2>豊かな生き物</h2>
+        <table width="100%">
+        <tr>
+            <td class="key">河原と水辺に植物がはえていますか？</td>
+            <td class="value"><%= @datum.value4 %></td>        
+        </tr>
+        <tr>
+            <td class="key">鳥はいますか？</td>
+            <td class="value"><%= @datum.value5 %></td>        
+        </tr>
+        <tr>
+            <td class="key">魚がいますか？</td>
+            <td class="value"><%= @datum.value6 %></td>        
+        </tr>
+        <tr>
+            <td class="key">川底に生き物がいますか？</td>
+            <td class="value"><%= @datum.value7 %></td>
+        </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="data-group">
+        <h2>水のきれいさ</h2>
+        <table width="100%">
+        <tr>
+            <td class="key">水は透明ですか？</td>
+            <td class="value"><%= @datum.value8 %></td>
+        </tr>
+        <tr>
+            <td class="key">水はくさくないですか？</td>
+            <td class="value"><%= @datum.value9 %></td>
+        </tr>
+        <tr>
+            <td class="key">水はきれいですか？</td>
+            <td class="value"><%= @datum.value10 %></td>
+        </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="data-group">
+        <h2>快適な水辺</h2>
+        <table width="100%">
+        <tr>
+            <td class="key">川やまわりのけしきは美しいですか？</td>
+            <td class="value"><%= @datum.value11 %></td>
+        </tr>
+        <tr>
+            <td class="key">ごみが目につきますか？</td>
+            <td class="value"><%= @datum.value12 %></td>
+        </tr>
+        <tr>
+            <td class="key">水にふれてみたいですか？</td>
+            <td class="value"><%= @datum.value13 %></td>
+        </tr>
+        <tr>
+            <td class="key">どんなにおいを感じますか？</td>
+            <td class="value"><%= @datum.value14 %></td>
+        </tr>
+        <tr>
+            <td class="key">どんな音が聞こえますか？</td>
+            <td class="value"><%= @datum.value15 %></td>
+        </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="data-group">
+        <h2>地域とのつながり</h2>
+        <table width="100%">
+        <tr>
+            <td class="key">川にまつわる話を聞いたことがありますか？</td>
+            <td class="value"><%= @datum.value16 %></td>
+        </tr>
+        <tr>
+            <td class="key">水辺に近づきやすいですか？</td>
+            <td class="value"><%= @datum.value17 %></td>
+        </tr>
+        <tr>
+            <td class="key">多くの人が利用していますか？</td>
+            <td class="value"><%= @datum.value18 %></td>
+        </tr>
+        <tr>
+            <td class="key">産業などの活用</td>
+            <td class="value"><%= @datum.value19 %></td>
+        </tr>
+        <tr>
+            <td class="key">環境の活動</td>
+            <td class="value"><%= @datum.value20 %></td>
+        </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="data-group">
+        <h2>総合平均</h2>
+        <table width="100%">
+        <tr>
+            <td class="key">自然のすがた</td>
+            <td class="value"><%= @datum.value21 %></td>
+        </tr>
+        <tr>
+            <td class="key">ゆたかな生き物</td>
+            <td class="value"><%= @datum.value22 %></td>
+        </tr>
+        <tr>
+            <td class="key">水のきれいさ</td>
+            <td class="value"><%= @datum.value23 %></td>
+        </tr>
+        <tr>
+            <td class="key">快適な水辺</td>
+            <td class="value"><%= @datum.value24 %></td>
+        </tr>
+        <tr>
+            <td class="key">地域とのつながり</td>
+            <td class="value"><%= @datum.value25 %></td>
+        </tr>
+        </table>
+    </div>
+</div>
+<hr>
+<%= link_to '調査データを編集する', edit_datum_path(@datum) %> |
+<%= link_to '地点名に戻る', survey_path(@datum.survey_id) %>

@@ -1,20 +1,15 @@
-お名前：<%= @user.name %><br>
-メールアドレス：<%= @user.email %><br>
-<%= link_to "アカウントの編集", edit_user_path %>
-
-<% if @user.surveys.any? %>
-	<h4>登録している調査数 <%= @surveys.count %> 件</h4>
-	<table>
-    <tr>
-        <th>登録している調査名</th>
-    </tr>
-    <tr>
+<div id="user_show">
+<p>お名前：<%= @user.name %></p>
+<p>メールアドレス：<%= @user.email %></p>
+<p><%= link_to "アカウントの編集", edit_user_path %></p>
+<hr>
+</div>
+<div id=user_show_survey>
+    <% if @user.surveys.any? %>
+    	<h1>登録している調査数 <%= @surveys.count %> 件</h1>
+        <h2>登録している調査名</h2>
         <% @surveys.each do |survey| %>
-            <td><%= link_to survey.name, controller: "surveys", action: "show", id: survey.id %></td>
+            <p><%= link_to survey.name, controller: "surveys", action: "show", id: survey.id %></p>
         <% end %>
-    </tr>
-</table>
-
-
-
-<% end %>
+    <% end %>
+</div>

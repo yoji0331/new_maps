@@ -1,12 +1,12 @@
 <p><%= notice %></p>
-<h4><%= @survey.name %></h4>
-<table>
-	<tr>登録している地点名</tr>
-	<tr>
-		<% @survey.data.each do |datum| %>
-			<td><%= link_to datum.site_name, controller: "data", action: "show", id: datum.id %></td>
-		<% end %>
-	</tr>
-</table>
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
-<%= link_to 'Back', surveys_path %>
+<div id="surveys_show">
+	<h1><%= @survey.name %></h1>
+	<h2>登録している地点名</h2>
+	<% @survey.data.each do |datum| %>
+			<p><%= link_to datum.site_name, controller: "data", action: "show", id: datum.id %></p>
+	<% end %>
+</div>
+<div id=footer>
+	<%= link_to '調査を編集する', edit_survey_path(@survey) %> |
+	<%= link_to '調査一覧へ戻る', surveys_path %>
+</div>
