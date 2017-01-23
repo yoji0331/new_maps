@@ -3,7 +3,7 @@ class CreateData < ActiveRecord::Migration
     create_table :data do |t|
     	t.integer :survey_id
       t.string :site_name
-      t.string :reseacher_name
+      t.string :researcher_name
       t.datetime :date
       t.string :weather
       t.float :temperature

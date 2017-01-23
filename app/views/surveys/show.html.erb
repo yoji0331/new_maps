@@ -3,7 +3,7 @@
 <table>
 	<tr>登録している地点名</tr>
 	<tr>
-		<% @data.each do |datum| %>
+		<% @survey.data.each do |datum| %>
 			<td><%= link_to datum.site_name, controller: "data", action: "show", id: datum.id %></td>
 		<% end %>
 	</tr>

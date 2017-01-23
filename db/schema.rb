@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20161210222010) do
     t.float    "value23"
     t.float    "value24"
     t.float    "value25"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "surveys", force: :cascade do |t|

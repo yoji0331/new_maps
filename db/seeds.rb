@@ -14,6 +14,12 @@ User.create!(name:  "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
+Survey.create!(user_id: 1,
+							 name: "七戸川調査")
+
+Survey.create!(user_id: 1,
+							 name: "馬淵川調査")
+
 require 'csv'
 
 def csv_import(csv_name)
