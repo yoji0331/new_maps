@@ -6,6 +6,7 @@
 			<p><%= link_to datum.site_name, controller: "data", action: "show", id: datum.id %></p>
 	<% end %>
 </div>
+<hr>
 <div id=footer>
 	<%= link_to '調査を編集する', edit_survey_path(@survey) %> |
 	<%= link_to '調査一覧へ戻る', surveys_path %>
