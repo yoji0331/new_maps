@@ -2,7 +2,9 @@
 <h1>アカウント情報</h1>
 <p>お名前：<%= @user.name %></p>
 <p>メールアドレス：<%= @user.email %></p>
-<p><%= link_to "アカウントの編集", edit_user_path %></p>
+<% if current_user?(@user) %>
+	<p><%= link_to "アカウントの編集", edit_user_path %></p>
+<% end %>
 <hr>
 </div>
 <div id=user_show_survey>
