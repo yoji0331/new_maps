@@ -7,7 +7,7 @@
       <td><%= survey.name %></td>
       <td><%= link_to '調査名を見る', survey %></td>
       <td><%= link_to '調査を編集する', edit_survey_path(survey) %></td>
-      <td><%= link_to '調査を削除', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to '調査を削除', survey, method: :delete, data: { confirm: '調査を削除します。よろしいですか？' } %></td>
     </tr>
   <% end %>
 </table>
