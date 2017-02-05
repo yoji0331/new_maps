@@ -1,5 +1,5 @@
 class Survey < ActiveRecord::Base
-    has_many :data
+    has_many :data, dependent: :destroy
     belongs_to :user
     
     #nameの文字数は256文字までである制限
