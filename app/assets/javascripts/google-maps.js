@@ -17,6 +17,8 @@ var markerclusterer;
 var open = [];
 var latlngs = [];
 var current=[];
+var sites=[];
+var surveys=[];
 
 
 $(document).ready(function(){
@@ -30,6 +32,8 @@ $(document).ready(function(){
             var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
             latlngs[i] = LatLng; 
             open[i] = 0;
+            sites[i] = spots[i].site_name;
+            surveys[i] = spots[i].survey_name;
             var marker = RADAR_CHART.createMarker(LatLng, i,false);
             markers.push(marker);
         }
@@ -94,7 +98,7 @@ RADAR_CHART.createMarker = function(latlng, i,redraw){
     function attachInfowindow(marker){
         if(infowindow === null){
             infowindow = new google.maps.InfoWindow({
-                content: name + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
+                content: surveys[i] + '<br>' + sites[i] + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
                 map: map,
                 zIndex: maxZIndex
             });

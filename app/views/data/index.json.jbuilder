@@ -1,6 +1,6 @@
 json.array!(@data) do |datum|
   json.extract! datum, 
-  	:survey_id, 
+  	:survey_name, 
   	:site_name, 
   	:researcher_name, 
   	:date,

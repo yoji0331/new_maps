@@ -112,4 +112,7 @@ class Datum < ActiveRecord::Base
         
       end
   end  
+  def survey_name
+    self.survey.name
+  end
 end
