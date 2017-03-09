@@ -37,16 +37,23 @@ $(document).ready(function(){
             var marker = RADAR_CHART.createMarker(LatLng, i,false);
             markers.push(marker);
         }
-        markerclusterer = new MarkerClusterer(map, markers, {zoomOnClick:true, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        markerclusterer = new MarkerClusterer(map, markers, {maxZoom: 13,zoomOnClick:true, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
     });
 });
+
 
 ClusterIcon.prototype.triggerClusterClick = function () {
     var markerClusterer, markers;
     markerClusterer = this.cluster_.getMarkerClusterer();
-    markers = this.cluster_.markers_;
-    console.log(markers);
+    mc_markers = this.cluster_.markers_;
+    console.log(mc_markers);
     this.map_.fitBounds(this.cluster_.getBounds());
+
+    var zoom = this.map_.getZoom();
+    var maxZoom = markerClusterer.getMaxZoom();
+    if (zoom >= maxZoom && mc_markers.length > 1) {
+        return markerClusterer.onClickZoom(this);
+    }
 }
 function format(spot, i){
     formatData[i] = new Array(6);
@@ -98,7 +105,7 @@ function Mouseclick(ele){
 RADAR_CHART.removeRadarchart = function(index){
     var svg = d3.select('#infodiv' + index).remove();
 }
-RADAR_CHART.createMarker = function(latlng, i,redraw){
+RADAR_CHART.createMarker = function(latlng, i,redraw,same){
     var marker = new google.maps.Marker({
         position: latlng,
         map: map
@@ -109,11 +116,21 @@ RADAR_CHART.createMarker = function(latlng, i,redraw){
     var infowindow  = null;
     function attachInfowindow(marker){
         if(infowindow === null){
-            infowindow = new google.maps.InfoWindow({
-                content: surveys[i] + '<br>' + sites[i] + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
-                map: map,
-                zIndex: maxZIndex
-            });
+            if(same == true){
+                infowindow = new google.maps.InfoWindow({
+                    content: surveys[i] + '<br>' + sites[i] + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
+                    pixelOffset: new google.maps.Size(i*5,i*5),
+                    map: map,
+                    zIndex: maxZIndex
+                });    
+            } else {
+                infowindow = new google.maps.InfoWindow({
+                    content: surveys[i] + '<br>' + sites[i] + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
+                    map: map,
+                    zIndex: maxZIndex
+                });
+            }
+            console.log(same);
             current[i] = infowindow;
             maxZIndex++;
             infowindows.push(infowindow);
