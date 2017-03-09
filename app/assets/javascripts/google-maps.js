@@ -19,6 +19,7 @@ var latlngs = [];
 var current=[];
 var sites=[];
 var surveys=[];
+var same_place=[];
 
 
 $(document).ready(function(){
@@ -30,11 +31,18 @@ $(document).ready(function(){
         for(i=0;i<spots.length;i++){
             format(spots[i], i);
             var LatLng = new google.maps.LatLng(spots[i].latitude,spots[i].longitude);
-            latlngs[i] = LatLng; 
             open[i] = 0;
             sites[i] = spots[i].site_name;
             surveys[i] = spots[i].survey_name;
-            var marker = RADAR_CHART.createMarker(LatLng, i,false);
+            same_place[i] = false;
+            for(var j=0;j<latlngs.length;j++){
+                if(spots[j].latitude == spots[i].latitude && spots[j].longitude == spots[i].longitude){
+                    same_place[i] = true;
+                }
+            }
+            var marker = RADAR_CHART.createMarker(LatLng, i,false,same_place[i]);
+            console.log(same_place[i]);
+            latlngs[i] = LatLng; 
             markers.push(marker);
         }
         markerclusterer = new MarkerClusterer(map, markers, {maxZoom: 13,zoomOnClick:true, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
@@ -83,7 +91,7 @@ function redraw(sc){
         }
     });
     for(i=0;i<markers.length;i++){
-        var marker = RADAR_CHART.createMarker(latlngs[i], i,true);
+        var marker = RADAR_CHART.createMarker(latlngs[i], i,true,same_place[i]);
         markers[i] = marker;
     }
     markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
@@ -98,7 +106,7 @@ function Mouseclick(ele){
     var i = ele.id.substr(7);
     removeMarker(i);
     open[i] = 0;
-    RADAR_CHART.createMarker(latlngs[i], i, false);
+    RADAR_CHART.createMarker(latlngs[i], i, false,same_place[i]);
     markerclusterer.clearMarkers();
     markerclusterer.addMarkers(markers);
 }
@@ -119,7 +127,7 @@ RADAR_CHART.createMarker = function(latlng, i,redraw,same){
             if(same == true){
                 infowindow = new google.maps.InfoWindow({
                     content: surveys[i] + '<br>' + sites[i] + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
-                    pixelOffset: new google.maps.Size(i*5,i*5),
+                    pixelOffset: new google.maps.Size(i*10,i*10),
                     map: map,
                     zIndex: maxZIndex
                 });    
