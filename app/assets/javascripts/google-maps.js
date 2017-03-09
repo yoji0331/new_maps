@@ -1,7 +1,7 @@
 /*global google, markerclusterer, $, d3*/
 var map = new google.maps.Map(
     document.getElementById('map'), {
-        zoom: 3,
+        zoom: 8,
         center: {
             lat: 35.5614174,
             lng: 139.6928300
@@ -37,10 +37,17 @@ $(document).ready(function(){
             var marker = RADAR_CHART.createMarker(LatLng, i,false);
             markers.push(marker);
         }
-        markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        markerclusterer = new MarkerClusterer(map, markers, {zoomOnClick:true, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
     });
 });
 
+ClusterIcon.prototype.triggerClusterClick = function () {
+    var markerClusterer, markers;
+    markerClusterer = this.cluster_.getMarkerClusterer();
+    markers = this.cluster_.markers_;
+    console.log(markers);
+    this.map_.fitBounds(this.cluster_.getBounds());
+}
 function format(spot, i){
     formatData[i] = new Array(6);
     formatData[i][0] = [spot.value1,spot.value2,spot.value3];
