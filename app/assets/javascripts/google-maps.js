@@ -85,6 +85,8 @@ function Mouseclick(ele){
     removeMarker(i);
     open[i] = 0;
     RADAR_CHART.createMarker(latlngs[i], i, false);
+    markerclusterer.clearMarkers();
+    markerclusterer.addMarkers(markers);
 }
 RADAR_CHART.removeRadarchart = function(index){
     var svg = d3.select('#infodiv' + index).remove();
@@ -94,6 +96,9 @@ RADAR_CHART.createMarker = function(latlng, i,redraw){
         position: latlng,
         map: map
     });
+    if(markers[i]){
+        markers[i] = marker
+    };
     var infowindow  = null;
     function attachInfowindow(marker){
         if(infowindow === null){
