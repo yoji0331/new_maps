@@ -92,7 +92,7 @@ function redraw(sc){
         var marker = RADAR_CHART.createMarker(latlngs[i], i,true,same_place[i]);
         markers[i] = marker;
     }
-    markerclusterer = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+    markerclusterer = new MarkerClusterer(map, markers, {maxZoom: 13,zoomOnClick:false, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 
 }
 function removeMarker(i){
