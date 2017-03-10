@@ -45,18 +45,16 @@ $(document).ready(function(){
             latlngs[i] = LatLng; 
             markers.push(marker);
         }
-        markerclusterer = new MarkerClusterer(map, markers, {maxZoom: 13,zoomOnClick:true, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        markerclusterer = new MarkerClusterer(map, markers, {maxZoom: 13,zoomOnClick:false, imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
     });
 });
 
 
 ClusterIcon.prototype.triggerClusterClick = function () {
-    var markerClusterer, markers;
+    var markerClusterer, mc_markers;
     markerClusterer = this.cluster_.getMarkerClusterer();
     mc_markers = this.cluster_.markers_;
-    console.log(mc_markers);
     this.map_.fitBounds(this.cluster_.getBounds());
-
     var zoom = this.map_.getZoom();
     var maxZoom = markerClusterer.getMaxZoom();
     if (zoom >= maxZoom && mc_markers.length > 1) {
@@ -127,7 +125,7 @@ RADAR_CHART.createMarker = function(latlng, i,redraw,same){
             if(same == true){
                 infowindow = new google.maps.InfoWindow({
                     content: surveys[i] + '<br>' + sites[i] + '<div id="infodiv' + i + '" onclick = Mouseclick(this)></div>',
-                    pixelOffset: new google.maps.Size(i*10,i*10),
+                    pixelOffset: new google.maps.Size(i*10,i * -10),
                     map: map,
                     zIndex: maxZIndex
                 });    
@@ -138,7 +136,6 @@ RADAR_CHART.createMarker = function(latlng, i,redraw,same){
                     zIndex: maxZIndex
                 });
             }
-            console.log(same);
             current[i] = infowindow;
             maxZIndex++;
             infowindows.push(infowindow);
