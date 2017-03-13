@@ -41,7 +41,6 @@ $(document).ready(function(){
                 }
             }
             var marker = RADAR_CHART.createMarker(LatLng, i,false,same_place[i]);
-            console.log(same_place[i]);
             latlngs[i] = LatLng; 
             markers.push(marker);
         }
